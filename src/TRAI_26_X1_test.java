@@ -5,6 +5,7 @@ import java.util.Random;
 /**
  * Test class TRA I 2026 task X1.
  */
+
 public class TRAI_26_X1_test {
 
     static Random rnd = new Random();
