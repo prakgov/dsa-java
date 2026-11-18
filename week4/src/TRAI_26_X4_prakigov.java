@@ -38,6 +38,14 @@ public class TRAI_26_X4_prakigov implements TRAI_26_X4 {
         return check(node.right)        // right subtree
      *
      */
+     
+     /* COMPLEXITY ANALYSIS:
+     * 
+     * TIME: algorithm runs in O(n) time, where n is the number of nodes in the tree. Each node is visited exactly once during the in-order traversal, and the comparison of values is done in constant time. 
+     * SPACE: O(k), where k is the height of the tree, due to the recursive call stack. Worst case scenario (skewed tree), the height can be equal to the number of nodes, i.e.,  O(n) space complexity. However, for an average case scenario (balanced tree), height is logarithmic in relation to the number of nodes, i.e.,  O(log n) space complexity.
+     * 
+     * In conclusion, the overall time complexity is linear time and space complexity is linear in the worst case and logarithmic in the average case.
+     * /
 
     /**
      * Are the elements of a tree in in-order or not.
