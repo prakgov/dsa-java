@@ -1,18 +1,18 @@
 import java.util.ArrayList;
-import java.util.Collections;
+//import java.util.Collections;
 
 public class Main{
     public static void main(String[] args) {
         // Practice Task 8
         TaskSolutions ts = new TaskSolutions();
-        ArrayList<Integer> originalNumbers = new ArrayList<Integer>();
+        ArrayList<Integer> originalNumbers = new ArrayList<>();
         originalNumbers.add(33);
         originalNumbers.add(15);
         originalNumbers.add(20);
         originalNumbers.add(34);
         originalNumbers.add(8);
         originalNumbers.add(12);
-        ArrayList<Integer> numbersToCheck = new ArrayList<Integer>();
+        ArrayList<Integer> numbersToCheck = new ArrayList<>();
         numbersToCheck.add(15);
         numbersToCheck.add(23);
         numbersToCheck.add(34);
