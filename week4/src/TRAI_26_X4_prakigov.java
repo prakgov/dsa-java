@@ -55,7 +55,7 @@ public class TRAI_26_X4_prakigov implements TRAI_26_X4 {
 
         BTreeNode<E> root = T.getRoot();
         PreviousValue<E> previousValue = new PreviousValue<>();
-        return checkHelper(root, previousValue);
+        return validateInorder(root, previousValue);
     }
 
     // wrapper class to hold the previous value during recursion and to prevent shared state issues
@@ -64,27 +64,27 @@ public class TRAI_26_X4_prakigov implements TRAI_26_X4 {
     }
 
     // helper method to perform in-order traversal and check if the elements are in ascending order without duplicates
-    private <E extends Comparable<? super E>> boolean checkHelper(
+    private <E extends Comparable<? super E>> boolean validateInorder(
             BTreeNode<E> node, PreviousValue<E> previousValue) {
         // base case: if the node is null, return true
         if (node == null) {
             return true;
         }
 
-        // recursively check left subtree
-        if (!checkHelper(node.getLeftChild(), previousValue)) {
+        // recursive case: traverse left subtree
+        if (!validateInorder(node.getLeftChild(), previousValue)) {
             return false;
         }
 
-        // compares values for duplicates and if current value is less than or equal to the previous value
+        // compares values for duplicates and ascending order
         if (previousValue.value != null
                 && node.getElement().compareTo(previousValue.value) <= 0) {
             return false;
         }
         previousValue.value = node.getElement();
 
-        // recursively check right subtree
-        return checkHelper(node.getRightChild(), previousValue);
+        // recursive case: traverse right subtree
+        return validateInorder(node.getRightChild(), previousValue);
     }
 
 }
