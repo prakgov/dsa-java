@@ -1,0 +1,90 @@
+import fi.uef.cs.tra.BTree;
+import fi.uef.cs.tra.BTreeNode;
+
+public class TRAI_26_X4_prakigov implements TRAI_26_X4 {
+    /**
+     * SELF-EVALUATION HERE:
+     * The pseudocode and implementation was quite straightforward. Thanks to the readily-available package built for binary trees, I was able to implement the in-order traversal check without any issues.
+     * The only moment of confusion was the recursion which caused the issue of handling of the previousValue and created a shared-state bug across recursive calls and caused the failure of part of the tests.
+     * I resolved it by creating a wrapper class to hold the previousValue, ensuring that it is shared correctly across recursive calls.
+     * 
+     *
+     */
+
+    /**
+     * PSEUDO CODE:
+     * Do an in-order traversal (left, root, right).
+     * Remember the previously visited value.
+     * If the current value less than the previous value, return false.
+     * Each node is visited once, so it runs in O(n).
+     * 
+    prev = null
+
+    function isInOrder(root):
+        prev = null
+        return check(root)
+
+    function check(node):
+        if node == null:
+            return true
+
+        if not check(node.left):        // left subtree
+            return false
+
+        if prev != null and node.value <= prev:   // duplicates are not allowed
+            return false
+        prev = node.value
+
+        return check(node.right)        // right subtree
+     *
+     */
+
+    /**
+     * Are the elements of a tree in in-order or not.
+     * You may write additional methods as well as long as you keep this method header unchanged.
+     * @param T binary tree to check
+     * @return true if the elements are in in-order, false otherwise
+     * @param <E> element type
+     */
+    @Override
+    public <E extends Comparable<? super E>> boolean isInOrdered(BTree<E> T) {
+        // base case: if the tree is empty, it is considered in-order
+        if (T.isEmpty()) {
+            return true;
+        }
+
+        BTreeNode<E> root = T.getRoot();
+        PreviousValue<E> previousValue = new PreviousValue<>();
+        return checkHelper(root, previousValue);
+    }
+
+    // wrapper class to hold the previous value during recursion and to prevent shared state issues
+    private static class PreviousValue<E> {
+        private E value;
+    }
+
+    // helper method to perform in-order traversal and check if the elements are in ascending order without duplicates
+    private <E extends Comparable<? super E>> boolean checkHelper(
+            BTreeNode<E> node, PreviousValue<E> previousValue) {
+        // base case: if the node is null, return true
+        if (node == null) {
+            return true;
+        }
+
+        // recursively check left subtree
+        if (!checkHelper(node.getLeftChild(), previousValue)) {
+            return false;
+        }
+
+        // compares values for duplicates and if current value is less than or equal to the previous value
+        if (previousValue.value != null
+                && node.getElement().compareTo(previousValue.value) <= 0) {
+            return false;
+        }
+        previousValue.value = node.getElement();
+
+        // recursively check right subtree
+        return checkHelper(node.getRightChild(), previousValue);
+    }
+
+}
