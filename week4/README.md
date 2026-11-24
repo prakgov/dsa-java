@@ -1,4 +1,4 @@
-## DSA Week 3
+## DSA Week 4
 
 - [Week 3](.week3/README.md)
 - [Practice Tasks]()  // TODO
